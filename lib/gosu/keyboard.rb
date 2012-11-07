@@ -7,7 +7,7 @@ module Gosu
       end
     end
     
-    attr_reader :handler
+    attr_reader :window, :handler
     
     def initialize(window=nil)
       @window, @handler = window, Handler.new(self)

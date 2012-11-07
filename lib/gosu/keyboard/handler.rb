@@ -15,7 +15,10 @@ module Gosu
       end
       
       def call(&blk)
+        # TODO: Lots of logic here... iterator over the handlers chains to determine conditions are being met
+        # and if sooooo then just:
         
+        # window.instance_eval(&blk)
       end
       
     end
