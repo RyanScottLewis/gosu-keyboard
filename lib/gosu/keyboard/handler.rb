@@ -7,7 +7,7 @@ module Gosu
       def_delegators :@keyboard, :window
       
       def initialize(keyboard)
-        raise TypeError, 'keyboard must be an instance of Gosu::Keyboard' unless handler.instance_of?(Keyboard)
+        raise TypeError, 'keyboard must be an instance of Gosu::Keyboard' unless keyboard.instance_of?(Keyboard)
         
         @keyboard, @chains = keyboard, []
         @registry = {}
@@ -22,7 +22,7 @@ module Gosu
         @chains = []
       end
       
-      def call
+      def handle_keys
         @registry.each do |chains, blk|
           
           # Check if current Gosu keyboard events match the chains conditions
