@@ -6,6 +6,15 @@ A DSL for easily handling keyboard events within a `Gosu::Window`.
 
 > Note:  This is unfinished. Wait until the gem is out to install with the following methods.
 
+### Bundler
+
+Add the following to your `Gemfile`:
+
+```ruby
+gem 'gosu'
+gem 'gosu-keyboard', require: 'gosu/keyboard'
+```
+
 ### RubyGems
 
 Install with:
@@ -18,15 +27,6 @@ and `require` with:
 
 ```ruby
 require 'gosu/keyboard'
-```
-
-### Bundler
-
-Add the following to your `Gemfile`:
-
-```ruby
-gem 'gosu'
-gem 'gosu-keyboard', require: 'gosu/keyboard'
 ```
 
 ## Usage
