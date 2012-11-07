@@ -13,7 +13,6 @@ class GameWindow < Gosu::Window
     
   def update
     handle_keys
-    calculate_delta
   end
     
   def draw
