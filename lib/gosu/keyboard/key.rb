@@ -9,7 +9,7 @@ module Gosu
         @keyboard, @name, @blk = keyboard, name, blk
         @handler ||= @keyboard.handler
         
-        @handler.call(&blk) if block_given?
+        @handler.register(&blk) if block_given?
       end
       
       def code

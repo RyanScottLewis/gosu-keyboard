@@ -33,14 +33,14 @@ module Gosu
       
     end
     
+    extend Forwardable
     attr_reader :window, :handler
+    def_delegators :@handler, :handle_keys
     
-    def initialize(window=nil)
+    def initialize(window=nil, &blk)
       @window, @handler = window, Handler.new(self)
-    end
-    
-    def handle_keys(&blk)
-      DSL.call(self, &blk)
+      
+      DSL.call(self, &blk) # Setup the keyboards events..
     end
     
   end

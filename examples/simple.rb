@@ -9,35 +9,18 @@ require 'gosu-keyboard'
 
 require 'pp'
 
-pp Gosu::Keyboard.keys
+# pp Gosu::Keyboard.keys
 
 
 class GameWindow < Gosu::Window
+  
   def initialize
     super(Gosu::screen_width, Gosu::screen_height, false)
       
     self.caption = "Gosu::Keyboard Test"
       
     @font = Gosu::Font.new(self, Gosu::default_font_name, 40)
-    @keyboard = Gosu::Keyboard.new(self)
-    
-    @default_text = 'Press left, right, shift + left, shift + right, a, d, shift + a, or shift + d'
-    @current_text = @default_text
-  end
-    
-  def update
-    handle_keys
-  end
-    
-  def draw
-    @font.draw @current_text, 0, 0, 0, 1, 1, Gosu::Color::BLUE
-  end
-    
-  protected
-    
-  def handle_keys
-    @keyboard.handle_keys do
-      
+    @keyboard = Gosu::Keyboard.new(self) do
       escape { close }
       
       left_shift & left | left_shift & a { @current_text = 'running left!' }
@@ -47,7 +30,19 @@ class GameWindow < Gosu::Window
       
       nothing { @current_text = @default_text }
     end
+    
+    @default_text = 'Press left, right, shift + left, shift + right, a, d, shift + a, or shift + d'
+    @current_text = @default_text
   end
+    
+  def update
+    @keyboard.handle_keys
+  end
+    
+  def draw
+    @font.draw @current_text, 0, 0, 0, 1, 1, Gosu::Color::BLUE
+  end
+  
 end
 
 
