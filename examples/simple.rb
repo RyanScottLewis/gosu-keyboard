@@ -31,8 +31,7 @@ class GameWindow < Gosu::Window
       nothing { @current_text = @default_text }
     end
     
-    @default_text = 'Press left, right, shift + left, shift + right, a, d, shift + a, or shift + d'
-    @current_text = @default_text
+    @current_text = @default_text = 'Press left, right, shift + left, shift + right, a, d, shift + a, or shift + d'
   end
     
   def update
@@ -41,6 +40,11 @@ class GameWindow < Gosu::Window
     
   def draw
     @font.draw @current_text, 0, 0, 0, 1, 1, Gosu::Color::BLUE
+  end
+  
+  # Always show the system mouse cursor, for aesthetic reasons..
+  def needs_cursor?
+    true
   end
   
 end

@@ -25,10 +25,20 @@ module Gosu
       def handle_keys
         @registry.each do |chains, blk|
           
+          puts "", ""
+          p chains, blk
+          puts "", ""
+          
+          chains.each do |chain|
+            
+          end
+          
+          break
+          
           # Check if current Gosu keyboard events match the chains conditions
           # If so
           #   window.instance_eval(&blk)
-          #   exit enumerator
+          #   break enumerator
           
         end
       end

@@ -16,22 +16,6 @@ module Gosu
         instance_eval(&blk)
       end
       
-      # def shift
-      #   left_shift | right_shift
-      # end
-      
-      # def alt
-      #   left_alt | right_alt
-      # end
-      
-      # def control
-      #   left_control | right_control
-      # end
-      
-      def nothing(&blk)
-        @nothing = blk
-      end
-      
       def method_missing(key_name, &blk)
         super unless Keyboard.keys.has_key?(key_name)
         
