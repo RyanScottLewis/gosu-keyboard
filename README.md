@@ -64,7 +64,7 @@ class GameWindow < Gosu::Window
   end
     
   def draw
-    @font.draw @current_text, 0, 0, 0, 1, 1, Gosu::Color::BLUE
+    @font.draw(@current_text, 0, 0, 0, 1, 1, Gosu::Color::BLUE)
   end
   
   # Always show the system mouse cursor, for aesthetic reasons..
