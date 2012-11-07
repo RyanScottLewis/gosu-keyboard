@@ -1,6 +1,10 @@
-# `gosu-keyboard`
+# Gosu-Keyboard
+
+A DSL for easily handling keyboard events within a `Gosu::Window`.
 
 ## Install
+
+> Note:  This is unfinished. Wait until the gem is out to install with the following methods.
 
 ### RubyGems
 
