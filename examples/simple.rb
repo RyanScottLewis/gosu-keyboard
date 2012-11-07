@@ -15,7 +15,8 @@ class GameWindow < Gosu::Window
     @font = Gosu::Font.new(self, Gosu::default_font_name, 40)
     @keyboard = Gosu::Keyboard.new(self)
     
-    @current_text = nil
+    @default_text = 'Press left, right, shift + left, shift + right, a, d, shift + a, or shift + d'
+    @current_text = @default_text
   end
     
   def update
@@ -38,7 +39,11 @@ class GameWindow < Gosu::Window
       left | a { @current_text = 'walking left!' }
       right | d { @current_text = 'walking right!' }
       
-      nothing { @current_text = 'Press left, right, shift + left, shift + right, a, d, shift + a, or shift + d' }
+      nothing { @current_text = @default_text }
     end
   end
 end
+
+
+window = GameWindow.new
+window.show
