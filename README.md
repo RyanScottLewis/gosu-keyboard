@@ -45,18 +45,24 @@ class GameWindow < Gosu::Window
     self.caption = "My Game"
     
     @font = Gosu::Font.new(self, Gosu::default_font_name, 40)
+    
+    @text = {
+      default: 'Press left, right, shift + left, shift + right, a, d, shift + a, or shift + d',
+      walking_left: 'Walking left!',
+      walking_right: 'Walking right!',
+      running_left: 'Running left!',
+      running_right: 'Running right!',
+    }
+    
     @keyboard = Gosu::Keyboard.new(self) do
-      default { @current_text = @default_text } # When no keys are being pressed
+      default { use_text(:default) } # When no keys are being pressed
       escape { close }
       
-      left_shift & left | left_shift & a { @current_text = 'Running left!' }
-      left_shift & right | left_shift & d { @current_text = 'Running right!' }
-      left | a { @current_text = 'Walking left!' }
-      right | d { @current_text = 'Walking right!' }
+      left_shift & left | left_shift & a { use_text(:running_left) }
+      left_shift & right | left_shift & d { use_text(:running_right) }
+      left | a { use_text(:walking_left) }
+      right | d { use_text(:walking_right) }
     end
-    
-    use_text
-    use_text(:default)
   end
     
   def update
@@ -95,3 +101,4 @@ require 'my_game'
 window = GameWindow.new
 window.show
 ```
+
