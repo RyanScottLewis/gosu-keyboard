@@ -16,6 +16,8 @@ spec = Gem::Specification.new do |s|
   s.executables  = `git ls-files -- bin/*`.lines.to_a.collect { |s| File.basename(s.strip) }
   
   s.add_dependency 'version', '~> 1.0.0'
+  s.add_dependency 'active_support', '~> 3'
+  s.add_dependency 'gosu', '~> 0.7.45'
   s.add_development_dependency 'rake', '~> 0.9'
   # s.add_development_dependency 'guard-rspec', '~> 2.1.1'
   # s.add_development_dependency 'fuubar', '~> 1.1'
