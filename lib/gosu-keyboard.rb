@@ -6,7 +6,7 @@ require 'active_support/core_ext/string/inflections'
 require 'active_support/hash_with_indifferent_access'
 require 'gosu'
 
-__LIB__ = Pathname.new(__FILE__).join('..', '..', 'lib').expand_path
+__LIB__ = Pathname.new(__FILE__).dirname.expand_path
 $:.unshift(__LIB__.to_s) unless $:.include?(__LIB__.to_s)
 
 require 'gosu/keyboard/dsl'
