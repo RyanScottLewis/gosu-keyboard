@@ -31,6 +31,8 @@ require 'gosu/keyboard'
 
 ## Usage
 
+### Sample usage within a `Gosu::Window`
+
 `my_game/lib/game_window.rb`
 
 ```ruby
