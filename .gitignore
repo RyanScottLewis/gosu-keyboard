@@ -1,0 +1,5 @@
+/pkg
+*.gemspec
+.rvmrc
+.DS_Store
+Gemfile.lock
