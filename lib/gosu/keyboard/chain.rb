@@ -4,11 +4,11 @@ module Gosu
     class Chain
       VALID_TYPES = [:and, :or]
       
-      attr_reader :children
+      attr_reader :type, :children
       
       def initialize(handler, type, *children)
         raise TypeError, "type must be one of the following: #{VALID_TYPES.join(', ')}" unless VALID_TYPES.include?(type)
-        raise TypeError, 'handler must be an instance of Gosu::Keyboard::Handler' unless handler.instance_of?(Handler)
+        raise TypeError, 'handler must be an instance of Gosu::Handler' unless handler.instance_of?(Handler)
         
         @handler, @type, @children = handler, type, children
         @handler.chains << self

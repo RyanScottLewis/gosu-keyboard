@@ -1,6 +1,5 @@
 module Gosu
   class Keyboard
-    
     class DSL
       
       class << self
@@ -21,16 +20,24 @@ module Gosu
       #   left_shift | right_shift
       # end
       
+      # def alt
+      #   left_alt | right_alt
+      # end
+      
+      # def control
+      #   left_control | right_control
+      # end
+      
       def nothing(&blk)
         @nothing = blk
       end
       
       def method_missing(key_name, &blk)
-        super unless Key::NAMES.has_key?(key_name)
+        super unless Keyboard.keys.has_key?(key_name)
         
         Key.new(@keyboard, key_name, &blk)
       end
+      
     end
-    
   end
 end

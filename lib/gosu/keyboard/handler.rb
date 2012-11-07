@@ -7,6 +7,8 @@ module Gosu
       def_delegators :@keyboard, :window
       
       def initialize(keyboard)
+        raise TypeError, 'keyboard must be an instance of Gosu::Keyboard' unless handler.instance_of?(Keyboard)
+        
         @keyboard, @chains = keyboard, []
       end
       

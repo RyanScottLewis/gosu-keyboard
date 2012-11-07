@@ -6,6 +6,12 @@ $:.unshift(__LIB__.to_s) unless $:.include?(__LIB__.to_s)
 require 'gosu'
 require 'gosu-keyboard'
 
+
+require 'pp'
+
+pp Gosu::Keyboard.keys
+
+
 class GameWindow < Gosu::Window
   def initialize
     super(Gosu::screen_width, Gosu::screen_height, false)
