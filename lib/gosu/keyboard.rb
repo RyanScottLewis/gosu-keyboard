@@ -12,7 +12,7 @@ $:.unshift(__LIB__.to_s) unless $:.include?(__LIB__.to_s)
 require 'gosu/keyboard/dsl'
 require 'gosu/keyboard/dsl/helpers'
 require 'gosu/keyboard/key'
-require 'gosu/keyboard/chain'
+require 'gosu/keyboard/condition'
 require 'gosu/keyboard/handler'
 
 module Gosu

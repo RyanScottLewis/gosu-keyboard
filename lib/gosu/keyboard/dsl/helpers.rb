@@ -16,8 +16,8 @@ module Gosu
           left_control | right_control
         end
         
-        def nothing(&blk)
-          @nothing = blk
+        def default(&blk)
+          @default = blk
         end
         
       end

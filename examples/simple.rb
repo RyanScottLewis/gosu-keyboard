@@ -17,12 +17,12 @@ class GameWindow < Gosu::Window
     @keyboard = Gosu::Keyboard.new(self) do
       escape { close }
       
-      left_shift & left | left_shift & a { @current_text = 'running left!' }
-      left_shift & right | left_shift & d { @current_text = 'running right!' }
-      left | a { @current_text = 'walking left!' }
-      right | d { @current_text = 'walking right!' }
+      # left_shift & left | left_shift & a { @current_text = 'running left!' }
+      # left_shift & right | left_shift & d { @current_text = 'running right!' }
+      # left | a { @current_text = 'walking left!' }
+      # right | d { @current_text = 'walking right!' }
       
-      nothing { @current_text = @default_text }
+      # default { @current_text = @default_text }
     end
     
     @current_text = @default_text = 'Press left, right, shift + left, shift + right, a, d, shift + a, or shift + d'

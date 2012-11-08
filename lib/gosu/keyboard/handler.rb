@@ -3,39 +3,38 @@ module Gosu
     class Handler
       
       extend Forwardable
-      attr_reader :keyboard, :chains
+      attr_reader :keyboard, :children
       def_delegators :@keyboard, :window
       
       def initialize(keyboard)
         raise TypeError, 'keyboard must be an instance of Gosu::Keyboard' unless keyboard.instance_of?(Keyboard)
         
-        @keyboard, @chains = keyboard, []
+        @keyboard, @children = keyboard, []
         @registry = {}
       end
       
-      def <<(chain)
-        @chains << chain
+      def <<(child)
+        @children << child
       end
       
       def register(&blk)
-        @registry[@chains] = blk
-        @chains = []
+        @registry[@children] = blk
+        @children = []
       end
       
       def handle_keys
-        @registry.each do |chains, blk|
+        @registry.each do |children, blk|
           
           puts "", ""
-          p chains, blk
+          p children, blk
           puts "", ""
           
-          chains.each do |chain|
-            
-          end
+          # children.each do |child|
+          #   
+          # end
           
-          break
-          
-          # Check if current Gosu keyboard events match the chains conditions
+          exit
+          # Check if current Gosu keyboard events match the children conditions
           # If so
           #   window.instance_eval(&blk)
           #   break enumerator

@@ -1,7 +1,7 @@
 module Gosu
   class Keyboard
     
-    class Chain
+    class Condition
       VALID_TYPES = [:and, :or]
       
       attr_reader :type, :children
@@ -11,7 +11,7 @@ module Gosu
         raise TypeError, 'handler must be an instance of Gosu::Handler' unless handler.instance_of?(Handler)
         
         @handler, @type, @children = handler, type, children
-        @handler.chains << self
+        @handler.children << self
       end
       
       def <<(key)
@@ -21,11 +21,11 @@ module Gosu
       end
       
       def &(key)
-        @children << key
+        @children << @type == :and ? key : Condition.new(@handler, :and, key)
       end
       
       def |(key)
-        @children << Chain.new(@handler, :or, key)
+        @children << @type == :or ? key : Condition.new(@handler, :or, key)
       end
     end
     

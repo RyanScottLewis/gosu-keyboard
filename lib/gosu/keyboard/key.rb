@@ -6,10 +6,14 @@ module Gosu
       def_delegators :@keyboard, :window
       
       def initialize(keyboard, name, handler=nil, &blk)
-        @keyboard, @name, @blk = keyboard, name, blk
+        @keyboard, @name = keyboard, name
         @handler ||= @keyboard.handler
         
-        @handler.register(&blk) if block_given?
+        if block_given?
+          p self
+          @handler.children << self
+          @handler.register(&blk)
+        end
       end
       
       def code
@@ -17,11 +21,11 @@ module Gosu
       end
       
       def &(key)
-        Chain.new(@handler, :and, self, key)
+        Condition.new(@handler, :and, self, key)
       end
         
       def |(key)
-        Chain.new(@handler, :or, self, key)
+        Condition.new(@handler, :or, self, key)
       end
       
     end
