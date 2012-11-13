@@ -29,7 +29,7 @@ require 'gosu/keyboard'
 
 ## Usage
 
-### Sample usage within a `Gosu::Window`
+> Note: Real usage in `MyGame::GameWindow#update`.
 
 `my_game/lib/keyboard_helpers.rb`
 
