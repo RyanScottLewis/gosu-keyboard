@@ -11,12 +11,9 @@ $:.unshift(__LIB__.to_s) unless $:.include?(__LIB__.to_s)
 
 require 'gosu/keyboard/dsl'
 require 'gosu/keyboard/dsl/helpers'
-require 'gosu/keyboard/key'
-require 'gosu/keyboard/condition'
-require 'gosu/keyboard/handler'
 
 module Gosu
-  class Keyboard
+  module Keyboard
     
     class << self
       
@@ -44,20 +41,10 @@ module Gosu
         end
       end
       
-      def handle_keys(window=nil, &blk)
-        new(window).handle_keys(&blk)
+      def handle_keys(window, &blk)
+        DSL.new(window, &blk)
       end
       
-    end
-    
-    extend Forwardable
-    attr_reader :window, :handler
-    def_delegators :@handler, :handle_keys
-    
-    def initialize(window=nil, &blk)
-      @window, @handler = window, Handler.new(self)
-      
-      DSL.call(self, &blk) # Setup the keyboards events..
     end
     
   end

@@ -1,23 +1,19 @@
 module Gosu
-  class Keyboard
+  module Keyboard
     class DSL
       
       module Helpers
         
         def shift
-          left_shift | right_shift
+          left_shift || right_shift
         end
         
         def alt
-          left_alt | right_alt
+          left_alt || right_alt
         end
         
         def control
-          left_control | right_control
-        end
-        
-        def default(&blk)
-          @default = blk
+          left_control || right_control
         end
         
       end

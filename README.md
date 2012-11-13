@@ -33,58 +33,104 @@ require 'gosu/keyboard'
 
 ### Sample usage within a `Gosu::Window`
 
+`my_game/lib/keyboard_helpers.rb`
+
+```ruby
+module MyGame
+  module KeyboardHelpers
+    def left
+      super || a
+    end
+    
+    def right
+      super || d
+    end
+    
+    def direction
+      left || right
+    end
+  end
+end
+
+class Gosu::Keyboard::DSL
+  include MyGame::KeyboardHelpers
+end
+```
+
+`my_game/lib/player.rb`
+
+```ruby
+module MyGame
+  class Player
+    attr_accessor :state, :direction
+    
+    def initialize
+      @state, @direction = :standing, :right
+    end
+  end
+end
+```
+
 `my_game/lib/game_window.rb`
 
 ```ruby
+module MyGame
+  class GameWindow < Gosu::Window
+    
+    def initialize
+      super(Gosu::screen_width, Gosu::screen_height, false)
+        
+      self.caption = "Gosu::Keyboard Test"
+        
+      @font = Gosu::Font.new(self, Gosu::default_font_name, 40)
+      
+      @player = Player.new
+    end
+      
+    def update
+      @player.state = :standing
+      
+      Gosu::Keyboard.handle_keys(self) do
+        down?(escape) { close }
+        
+        down?(left)               { @player.direction = :left }
+        down?(right)              { @player.direction = :right }
+        down?(direction)          { @player.state = :walking }
+        down?(shift && direction) { @player.state = :running }
+      end
+    end
+      
+    def draw
+      @font.draw "Player State: #{@player.state}", 0, 0, 0, 1, 1, Gosu::Color::BLUE
+      @font.draw "Player State: #{@player.direction}", 0, 30, 0, 1, 1, Gosu::Color::BLUE
+    end
+    
+    # Always show the system mouse cursor, for aesthetic reasons..
+    def needs_cursor?
+      true
+    end
+    
+  end
+end
+```
+
+`my_game/lib/my_game`
+
+```ruby
+require 'pathname'
+
 require 'bundler/setup'
 Bundler.require(:default)
 
-class GameWindow < Gosu::Window
-  
-  def initialize
-    super(Gosu::screen_width, Gosu::screen_height, false)
-    
-    self.caption = "My Game"
-    
-    @font = Gosu::Font.new(self, Gosu::default_font_name, 40)
-    
-    @text = {
-      default: 'Press left, right, shift + left, shift + right, a, d, shift + a, or shift + d',
-      walking_left: 'Walking left!',
-      walking_right: 'Walking right!',
-      running_left: 'Running left!',
-      running_right: 'Running right!',
-    }
-    
-    @keyboard = Gosu::Keyboard.new(self) do
-      default { use_text(:default) } # When no keys are being pressed
-      escape { close }
-      
-      left_shift & left | left_shift & a { use_text(:running_left) }
-      left_shift & right | left_shift & d { use_text(:running_right) }
-      left | a { use_text(:walking_left) }
-      right | d { use_text(:walking_right) }
-    end
-  end
-    
-  def update
-    @keyboard.handle_keys
-  end
-    
-  def draw
-    @font.draw(@current_text, 0, 0, 0, 1, 1, Gosu::Color::BLUE)
-  end
-  
-  # Always show the system mouse cursor, for aesthetic reasons..
-  def needs_cursor?
-    true
-  end
-  
-  def use_text(key)
-    @current_text = @text[key] unless @current_text == @text[key]
-  end
-  
-end
+require 'gosu'
+require 'gosu/keyboard'
+
+__LIB__ ||= Pathname.new(__FILE__).join('..', '..', 'lib').expand_path
+$:.unshift(__LIB__.to_s) unless $:.include?(__LIB__.to_s)
+
+require 'my_game/keyboard_helpers'
+require 'my_game/player'
+require 'my_game/game_window'
 ```
 
 `my_game/bin/my_game`
@@ -100,7 +146,7 @@ $:.unshift(__LIB__.to_s) unless $:.include?(__LIB__.to_s)
 
 require 'my_game'
 
-window = GameWindow.new
+window = MyGame::GameWindow.new
 window.show
 ```
 
