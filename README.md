@@ -91,7 +91,7 @@ module MyGame
         down?(left)                { @player.direction = :left }
         down?(right)               { @player.direction = :right }
         down?(direction && !shift) { @player.state = :walking }
-        down?(shift && direction)  { @player.state = :running }
+        down?(direction &&  shift) { @player.state = :running }
       end
     end
       
@@ -100,7 +100,8 @@ module MyGame
       @font.draw "Player State: #{@player.direction}", 0, 30, 0, 1, 1, Gosu::Color::BLUE
     end
     
-    # Always show the system mouse cursor, for aesthetic reasons..
+    # Always show the system mouse cursor, for aesthetic 
+    # reasons. Has nothing to do with example.
     def needs_cursor?
       true
     end

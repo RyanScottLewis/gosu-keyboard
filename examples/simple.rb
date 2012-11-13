@@ -55,7 +55,7 @@ module Simple
         down?(left)                { @player.direction = :left }
         down?(right)               { @player.direction = :right }
         down?(direction && !shift) { @player.state = :walking }
-        down?(shift && direction)  { @player.state = :running }
+        down?(direction &&  shift) { @player.state = :running }
       end
     end
       
