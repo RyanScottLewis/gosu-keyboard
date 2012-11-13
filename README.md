@@ -47,6 +47,18 @@ module MyGame
     def direction
       left || right
     end
+    
+    def walk
+      direction && !shift && !control
+    end
+    
+    def run
+      direction && shift && !control
+    end
+    
+    def crouch
+      alt
+    end
   end
 end
 
@@ -87,17 +99,22 @@ module MyGame
       @player.state = :standing
       
       Gosu::Keyboard.handle_keys(self) do
-        down?(escape)              { close }
-        down?(left)                { @player.direction = :left }
-        down?(right)               { @player.direction = :right }
-        down?(direction && !shift) { @player.state = :walking }
-        down?(direction &&  shift) { @player.state = :running }
+        down?(escape) { close }
+        down?(left)   { @player.direction = :left }
+        down?(right)  { @player.direction = :right }
+        down?(walk)   { @player.state = :walking }
+        down?(run)    { @player.state = :running }
+        down?(crouch) { @player.state = :crouching }
       end
     end
       
     def draw
       @font.draw "Player State: #{@player.state}", 0, 0, 0, 1, 1, Gosu::Color::BLUE
-      @font.draw "Player State: #{@player.direction}", 0, 30, 0, 1, 1, Gosu::Color::BLUE
+      @font.draw "Player Direction: #{@player.direction}", 0, 30, 0, 1, 1, Gosu::Color::BLUE
+      @font.draw "Left, A - Change direction of player to 'left' and state to 'walk'", 0, 90, 0, 1, 1, Gosu::Color::RED
+      @font.draw "Right, B - Change direction of player to 'right' and state to 'walk'", 0, 120, 0, 1, 1, Gosu::Color::RED
+      @font.draw "Shift - Change state of player to 'running'", 0, 150, 0, 1, 1, Gosu::Color::RED
+      @font.draw "Alt - Change state of player to 'crouching'", 0, 180, 0, 1, 1, Gosu::Color::RED
     end
     
     # Always show the system mouse cursor, for aesthetic 
