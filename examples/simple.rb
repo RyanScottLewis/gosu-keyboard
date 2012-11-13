@@ -51,8 +51,7 @@ module Simple
       @player.state = :standing
       
       Gosu::Keyboard.handle_keys(self) do
-        down?(escape) { close }
-        
+        down?(escape)             { close }
         down?(left)               { @player.direction = :left }
         down?(right)              { @player.direction = :right }
         down?(direction)          { @player.state = :walking }
