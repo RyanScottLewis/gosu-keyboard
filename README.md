@@ -87,11 +87,11 @@ module MyGame
       @player.state = :standing
       
       Gosu::Keyboard.handle_keys(self) do
-        down?(escape)             { close }
-        down?(left)               { @player.direction = :left }
-        down?(right)              { @player.direction = :right }
-        down?(direction)          { @player.state = :walking }
-        down?(shift && direction) { @player.state = :running }
+        down?(escape)              { close }
+        down?(left)                { @player.direction = :left }
+        down?(right)               { @player.direction = :right }
+        down?(direction && !shift) { @player.state = :walking }
+        down?(shift && direction)  { @player.state = :running }
       end
     end
       
