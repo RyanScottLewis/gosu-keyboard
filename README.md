@@ -4,8 +4,6 @@ A DSL for easily handling keyboard events within a `Gosu::Window`.
 
 ## Install
 
-> Note:  This is unfinished. Wait until the gem is out to install with the following methods.
-
 ### Bundler
 
 Add the following to your `Gemfile`:
