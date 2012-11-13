@@ -22,9 +22,7 @@ module Simple
   end
 end
 
-class Gosu::Keyboard::DSL
-  include Simple::KeyboardHelpers
-end
+Gosu::Keyboard.register(Simple::KeyboardHelpers)
 
 module Simple
   class Player

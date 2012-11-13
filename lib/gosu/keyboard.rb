@@ -45,6 +45,10 @@ module Gosu
         DSL.new(window, &blk)
       end
       
+      def register(mod)
+        DSL.send(:include, mod)
+      end
+      
     end
     
   end

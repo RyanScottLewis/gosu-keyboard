@@ -50,9 +50,7 @@ module MyGame
   end
 end
 
-class Gosu::Keyboard::DSL
-  include MyGame::KeyboardHelpers
-end
+Gosu::Keyboard.register(MyGame::KeyboardHelpers)
 ```
 
 `my_game/lib/player.rb`
