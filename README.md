@@ -29,9 +29,26 @@ require 'gosu/keyboard'
 
 ## Usage
 
-> Note: Real usage in `MyGame::GameWindow#update`.
+```ruby
+window = Gosu::Window.new
+
+Gosu::Keyboard.handle_keys(window) do
+  down?(escape)                       { close }
+  down?(left || a)                    { @player_direction = :left }
+  down?(right || d)                   { @player_direction = :right }
+  down?(!left_shift && !left_control) { @player_state = :walking }
+  down?(left_shift && !left_control)  { @player_state = :running }
+  down?(left_control)                 { @player_state = :crouching }
+end
+```
+
+***
+
+> Note: Usage in `MyGame::GameWindow#update`.
 
 `my_game/lib/keyboard_helpers.rb`
+
+Abstract your keys to clean up the DSL nicely.
 
 ```ruby
 module MyGame
